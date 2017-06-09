@@ -51,11 +51,10 @@ public class AirlineRest {
 	@Path("add")
 	@POST
 	public String addAirline(@DefaultValue("Default Name") @FormParam("name") String name) {
-		System.out.println("Samuel Test name = " + name );
 		Airline ap = new Airline();
 		ap.setName(name);
 		airlineService.create(ap);
-		return "success" +  name + " , new airline = " + airlineService.findByName(name);
+		return "success";
 	}
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -21,8 +22,17 @@ public class AirlineDao {
 	private EntityManager entityManager = JpaUtil.getEntityManager();
 
 
+	/**
+	 * https://stackoverflow.com/questions/5370736/entitymanager-persist-not-saving-anything-to-database
+	 * @param airline
+	 */
 	public void create(Airline airline) {
+		// The data will not be inserted into database. Here you have to add transaction manually. 
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
 		entityManager.persist(airline);
+		entityManager.flush();
+		transaction.commit();
 	}
 
 	public Airline update(Airline airline) {

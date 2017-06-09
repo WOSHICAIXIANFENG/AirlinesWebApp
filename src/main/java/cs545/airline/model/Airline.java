@@ -68,4 +68,9 @@ public class Airline {
 		}
 		return success;
 	}
+
+	@Override
+	public String toString() {
+		return "Airline [id=" + id + ", name=" + name + ", flights=" + flights + "]";
+	}
 }
