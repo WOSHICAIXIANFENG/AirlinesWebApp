@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import cs545.airline.model.Airline;
 import edu.mum.gf.workaround.JpaUtil;
@@ -31,7 +32,6 @@ public class AirlineDao {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		entityManager.persist(airline);
-		entityManager.flush();
 		transaction.commit();
 	}
 
@@ -40,7 +40,9 @@ public class AirlineDao {
 	}
 
 	public void delete(Airline airline) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(airline);
+		entityManager.getTransaction().commit();
 	}
 
 	public Airline findOne(long id) {
