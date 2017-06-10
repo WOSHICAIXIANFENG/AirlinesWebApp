@@ -36,7 +36,7 @@ public class AirplaneRest {
 		return planes;
 	}
 	
-	@Path("")
+	@Path("find/by/serial")
 	@Produces("application/json")
 	@GET
 	public Airplane getAirplaneBySrlnr(@QueryParam("serialno") String serialno) {
@@ -44,7 +44,7 @@ public class AirplaneRest {
 		return plane;
 	}
 	
-	@Path("")
+	@Path("find/by/flight")
 	@Consumes("application/json")
 	@Produces("application/json")
 	@POST
@@ -53,7 +53,7 @@ public class AirplaneRest {
 		return lines;
 	}
 	
-	@Path("")
+	@Path("find/by/model")
 	@Produces("application/json")
 	@GET
 	public List<Airplane> getAirplaneByModel(@QueryParam("model") String model) {

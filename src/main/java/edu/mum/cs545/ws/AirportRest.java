@@ -26,63 +26,63 @@ import cs545.airline.service.AirportService;
 public class AirportRest {
 	
 	@Inject
-	private AirportService AirportService;
+	private AirportService airportService;
 	
 	@Path("all")
 	@Produces("application/json")
 	@GET
 	public List<Airport> getAllAirports() {
-		List<Airport> ports = AirportService.findAll();
+		List<Airport> ports = airportService.findAll();
 		return ports;
 	}
 	
-	@Path("")
+	@Path("find/by/code")
 	@Produces("application/json")
 	@GET
 	public Airport getAirportByCode(@QueryParam("airportcode") String airportcode) {
-		Airport plane = AirportService.findByCode(airportcode);
+		Airport plane = airportService.findByCode(airportcode);
 		return plane;
 	}
 	
-	@Path("")
+	@Path("find/by/arrival")
 	@Consumes("application/json")
 	@Produces("application/json")
 	@POST
 	public List<Airport> getAirportByArrival(Flight flight) {
-		List<Airport> lines = AirportService.findByArrival(flight);
+		List<Airport> lines = airportService.findByArrival(flight);
 		return lines;
 	}
 	
-	@Path("")
+	@Path("find/by/departure")
 	@Consumes("application/json")
 	@Produces("application/json")
 	@POST
 	public List<Airport> getAirportByDeparture(Flight flight) {
-		List<Airport> lines = AirportService.findByDeparture(flight);
+		List<Airport> lines = airportService.findByDeparture(flight);
 		return lines;
 	}
 	
-	@Path("")
+	@Path("find/by/city")
 	@Produces("application/json")
 	@GET
 	public List<Airport> getAirportByCity(@QueryParam("city") String city) {
-		List<Airport> ports = AirportService.findByCity(city);
+		List<Airport> ports = airportService.findByCity(city);
 		return ports;
 	}
 	
-	@Path("")
+	@Path("find/by/country")
 	@Produces("application/json")
 	@GET
 	public List<Airport> getAirportByCountry(@QueryParam("country") String country) {
-		List<Airport> ports = AirportService.findByCountry(country);
+		List<Airport> ports = airportService.findByCountry(country);
 		return ports;
 	}
 	
-	@Path("")
+	@Path("find/by/name")
 	@Produces("application/json")
 	@GET
 	public List<Airport> getAirportByName(@QueryParam("name") String name) {
-		List<Airport> ports = AirportService.findByName(name);
+		List<Airport> ports = airportService.findByName(name);
 		return ports;
 	}
 	
@@ -93,7 +93,7 @@ public class AirportRest {
 							  @FormParam("city") String city,
 							  @FormParam("country") String country) {
 		Airport ap = new Airport(airportcode, name, city, country);
-		AirportService.create(ap);
+		airportService.create(ap);
 		return "success";
 	}
 	
@@ -101,8 +101,8 @@ public class AirportRest {
 	@Path("delete")
 	@Consumes("application/json")
 	@POST
-	public boolean deleteAirport(Airport Airport) {
-		AirportService.delete(Airport);
+	public boolean deleteAirport(Airport airport) {
+		airportService.delete(airport);
 		return true;
 	}
 	
@@ -110,9 +110,9 @@ public class AirportRest {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@POST
-	public Airport updateAirport(Airport Airport) {
-		AirportService.update(Airport);
-		return Airport;
+	public Airport updateAirport(Airport airport) {
+		airportService.update(airport);
+		return airport;
 	}
 	
 	// 4 / Schiphol1
@@ -120,9 +120,9 @@ public class AirportRest {
 	@Produces("application/json")
 	@GET
 	public void updateTest(@PathParam(value="id") long id, @PathParam(value = "capacity") int capacity) {
-		Airport Airport = new Airport("AMS", "Schiphol", "Amsterdam", "The Netherlands");
-		Airport.setId(id);
+		Airport airport = new Airport("AMS", "Schiphol", "Amsterdam", "The Netherlands");
+		airport.setId(id);
 		Client client = ClientBuilder.newClient();
-		client.target("http://localhost:8080/airlinesWebApp/rs/airport/update").request(MediaType.APPLICATION_JSON).post(Entity.json(Airport));
+		client.target("http://localhost:8080/airlinesWebApp/rs/airport/update").request(MediaType.APPLICATION_JSON).post(Entity.json(airport));
 	}
 }

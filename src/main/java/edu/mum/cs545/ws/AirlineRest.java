@@ -36,7 +36,7 @@ public class AirlineRest {
 		return lines;
 	}
 	
-	@Path("")
+	@Path("find/by/name")
 	@Produces("application/json")
 	@GET
 	public Airline getAirlineByName(@QueryParam("name") String name) {
@@ -44,7 +44,7 @@ public class AirlineRest {
 		return line;
 	}
 	
-	@Path("")
+	@Path("find/by/flight")
 	@Consumes("application/json")
 	@Produces("application/json")
 	@POST
