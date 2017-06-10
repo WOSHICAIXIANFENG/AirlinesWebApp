@@ -38,8 +38,8 @@ public class AirlineService {
 		return airlineDao.update(airport);
 	}
 
-	public Airline find(Airline airport) {
-		return airlineDao.findOne(airport.getId());
+	public Airline find(Airline airline) {
+		return airlineDao.findOne(airline.getId());
 	}
 
 	public Airline findByName(String name) {

@@ -10,8 +10,13 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 
 import cs545.airline.model.Airline;
 import cs545.airline.model.Flight;
@@ -68,9 +73,21 @@ public class AirlineRest {
 	
 	@Path("update")
 	@Consumes("application/json")
+	@Produces("application/json")
 	@POST
-	public boolean updateAirline(Airline airline) {
+	public Airline updateAirline(Airline airline) {
 		airlineService.update(airline);
-		return true;
+		return airline;
+	}
+	
+	@Path("test/update/{id}/{name}")
+	@Produces("application/json")
+	@GET
+	public void updateTest(@PathParam(value="id") long id, @PathParam(value = "name") String name) {
+		Airline airline = new Airline(name);
+		airline.setId(id);
+		Client client = ClientBuilder.newClient();
+		client.target("http://localhost:8080/airlinesWebApp/rs/airline/update").request(MediaType.APPLICATION_JSON).post(Entity.json(airline));
 	}
 }
+
