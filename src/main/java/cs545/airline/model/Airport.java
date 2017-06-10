@@ -1,8 +1,10 @@
 package cs545.airline.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,12 +23,12 @@ public class Airport {
 	private String name;
 	private String city;
 	private String country;
-	@OneToMany(mappedBy = "destination")
+	@OneToMany(mappedBy = "destination", cascade= CascadeType.ALL)
 	@OrderBy("arrivalDate, arrivalTime")
-	private List<Flight> arrivals;
-	@OneToMany(mappedBy = "origin")
+	private List<Flight> arrivals = new ArrayList<>();
+	@OneToMany(mappedBy = "origin", cascade= CascadeType.ALL)
 	@OrderBy("departureDate, departureTime")
-	private List<Flight> departures;
+	private List<Flight> departures = new ArrayList<>();
 
 	/* Constructors */
 	public Airport() {

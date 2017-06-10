@@ -18,24 +18,27 @@ import cs545.airline.model.Flight;
 @ApplicationScoped
 @Transactional
 public class FlightService {
-	
+
 	@Inject
 	private FlightDao flightDao;
-	
-	// These services should be evaluated to reconsider which methods should be public 
-	
-	public void create(Flight flight) {
-		flightDao.create(flight);
-	}
 
-	public void delete(Flight flight) {
-		flightDao.delete(flight);
-	}
+	// These services should be evaluated to reconsider which methods should be
+	// public
+
+	// CREATE MUST BE DONE THROUGH RELATED OBJECT
+	// public void create(Flight flight) {
+	// flightDao.create(flight);
+	// }
+
+	// DELETE MUST BE DONE THROUGH UPDATE ON RELATED OBJECT
+	// public void delete(Flight flight) {
+	// flightDao.delete(flight);
+	// }
 
 	public Flight update(Flight flight) {
 		return flightDao.update(flight);
 	}
-		
+
 	public Flight find(Flight flight) {
 		return flightDao.findOne(flight.getId());
 	}
@@ -56,7 +59,7 @@ public class FlightService {
 		return flightDao.findByDestination(airport.getId());
 	}
 
-	public List<Flight> findByArrival(Airplane airplane) {
+	public List<Flight> findByAirplane(Airplane airplane) {
 		return flightDao.findByAirplane(airplane.getId());
 	}
 
