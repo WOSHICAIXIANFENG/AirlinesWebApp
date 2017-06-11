@@ -10,7 +10,7 @@ import javax.ws.rs.QueryParam;
 import cs545.airline.model.Airline;
 import cs545.airline.service.AirlineService;
 
-@Named
+@Named("helloHaha")
 @Path("hello")
 public class HelloRest {
 

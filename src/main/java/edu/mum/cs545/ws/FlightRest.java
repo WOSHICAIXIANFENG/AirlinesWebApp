@@ -1,8 +1,11 @@
 package edu.mum.cs545.ws;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
@@ -23,8 +26,11 @@ import cs545.airline.model.Flight;
 import cs545.airline.service.FlightService;
 
 @Named
+@SessionScoped
 @Path("flight")
-public class FlightRest {
+public class FlightRest implements Serializable {
+	private static final long serialVersionUID = -5778510635894005247L;
+	
 	
 	@Inject
 	private FlightService flightService;

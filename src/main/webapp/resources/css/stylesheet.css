@@ -1,0 +1,9 @@
+#page {height:680px; width:1000px; margin:0 auto}
+
+body{
+	background:white;
+}
+
+.searchBtn {
+	margin-left: 25px;
+}

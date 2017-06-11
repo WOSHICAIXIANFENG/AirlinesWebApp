@@ -3,8 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<display-name>airlinesWebApp</display-name>
-
+	<display-name>airlinesWebApp New</display-name>
 
 	<listener>
 		<listener-class>edu.mum.gf.workaround.ResouceReleaseListener</listener-class>
@@ -24,6 +23,20 @@
 	</servlet>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<!-- <welcome-file>welcome.xhtml</welcome-file> -->
+		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>Faces</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
 </web-app>

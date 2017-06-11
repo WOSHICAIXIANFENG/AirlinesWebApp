@@ -85,6 +85,9 @@ public class Flight {
 	}
 
 	public String getDepartureDate() {
+		if (departureDate == null) {
+			return "unkown";
+		}
 		return df.format(departureDate);
 	}
 
@@ -109,6 +112,9 @@ public class Flight {
 	}
 
 	public String getArrivalDate() {
+		if (arrivalDate == null) {
+			return "unkown";
+		}
 		return df.format(arrivalDate);
 	}
 
