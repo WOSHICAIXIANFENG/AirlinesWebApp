@@ -1,8 +1,12 @@
 package edu.mum.cs545.ws;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
@@ -24,6 +28,7 @@ import cs545.airline.model.Airline;
 import cs545.airline.model.Airport;
 import cs545.airline.model.Flight;
 import cs545.airline.service.FlightService;
+import edu.mum.cs545.ui.bean.FlightFilterBean;
 
 @Named
 @SessionScoped
@@ -41,6 +46,41 @@ public class FlightRest implements Serializable {
 	public List<Flight> getAllFlight() {
 		List<Flight> flights = flightService.findAll();
 		return flights;
+	}
+	
+	public List<Flight> getAllFlight(FlightFilterBean bean) {
+		List<Flight> flights = flightService.findAll();
+		if (bean == null || bean.getAirline() == null) {
+			return flights;
+		}
+		
+		List<Flight> results = new ArrayList<>();
+		
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,Locale.US);
+		
+		System.out.println("Samuel Test dateStr = " + bean.getDepartDate());
+		System.out.println("Samuel Test dateStr = " + df.format(bean.getDepartDate()));
+		
+		for (Flight f : flights) {
+			if (bean.getDepartDate() != null) {
+				try {
+					String dateStr = df.format(bean.getDepartDate());
+					
+					System.out.println("Samuel Test dateStr = " + dateStr);
+					if (f.getAirline().getName().equals(bean.getAirline())) {
+						results.add(f);
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				if (f.getAirline().getName().equals(bean.getAirline())) {
+					results.add(f);
+				}
+			}
+			
+		}
+		return results;
 	}
 	
 	@Path("find/by/number")

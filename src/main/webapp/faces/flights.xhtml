@@ -28,8 +28,7 @@
 						  <f:selectItems 
 						  	value="#{flightFilter.airlineList}" 
 						  	var="item"
-   							itemLabel="#{item.name}" itemValue="#{item}"
-						  />
+   							itemLabel="#{item.name}" itemValue="#{item.name}" />
 						</h:selectOneMenu>
 						
 						<h:commandButton class="searchBtn" value="search">
@@ -41,7 +40,7 @@
 		</h:panelGroup>
 	
 	<h:panelGroup>	
-	<h:dataTable value="#{flightRest.getAllFlight()}" var="flight" border="1" id="flightsData">
+	<h:dataTable value="#{flightRest.getAllFlight(flightFilter)}" var="flight" border="1" id="flightsData">
 		<f:facet name="header">
 			<h:outputText value="All Flights"/>
 		</f:facet>

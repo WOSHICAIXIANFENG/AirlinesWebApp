@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
@@ -23,6 +25,7 @@ import javax.ws.rs.core.MediaType;
 import cs545.airline.model.Airline;
 import cs545.airline.model.Flight;
 import cs545.airline.service.AirlineService;
+import edu.mum.cs545.ui.bean.AirlineBean;
 
 @Named
 @ApplicationScoped
@@ -67,6 +70,20 @@ public class AirlineRest implements Serializable {
 		return "success";
 	}
 	
+	public String addAirlineLite(String name) {
+		Airline al = airlineService.findByName(name);
+		if (al != null) {
+			// show error one page
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This airname already been used by others"));
+			return "fail";
+		}
+		
+		Airline ap = new Airline();
+		ap.setName(name);
+		airlineService.create(ap);
+		
+		return "success";
+	}
 	
 	@Path("delete")
 	@Consumes("application/json")
@@ -74,6 +91,11 @@ public class AirlineRest implements Serializable {
 	public boolean deleteAirline(Airline airline) {
 		airlineService.delete(airline);
 		return true;
+	}
+	
+	public void deleteAirlineById(long id) {
+		Airline al = airlineService.findById(id);
+		airlineService.delete(al);
 	}
 	
 	@Path("update")
@@ -85,6 +107,12 @@ public class AirlineRest implements Serializable {
 		return airline;
 	}
 	
+	public void updateAirline(AirlineBean bean) {
+		Airline al = airlineService.findById(bean.getId());
+		al.setName(bean.getName());
+		airlineService.update(al);
+	}
+
 	@Path("test/update/{id}/{name}")
 	@Produces("application/json")
 	@GET

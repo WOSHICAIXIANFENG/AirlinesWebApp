@@ -12,6 +12,11 @@
 			<to-view-id>faces/flights.xhtml</to-view-id>
 		</navigation-case>
 		
+		<navigation-case>
+			<from-outcome>airlines</from-outcome>
+			<to-view-id>faces/airlines.xhtml</to-view-id>
+		</navigation-case>
+		
 </navigation-rule>
 
 
@@ -20,6 +25,51 @@
 		<navigation-case>
 			<from-outcome>back</from-outcome>
 			<to-view-id>index.xhtml</to-view-id>
+		</navigation-case>
+		
+</navigation-rule>
+
+<navigation-rule>
+		<from-view-id>faces/updateairline.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>back</from-outcome>
+			<to-view-id>faces/airlines.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+		<from-view-id>faces/createairline.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>back</from-outcome>
+			<to-view-id>faces/airlines.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>faces/airlines.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>fail</from-outcome>
+			<to-view-id>faces/createairline.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+		<from-view-id>faces/airlines.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>back</from-outcome>
+			<to-view-id>index.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>updateairline</from-outcome>
+			<to-view-id>faces/updateairline.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>addairline</from-outcome>
+			<to-view-id>faces/createairline.xhtml</to-view-id>
 		</navigation-case>
 		
 </navigation-rule>

@@ -56,7 +56,11 @@ public class AirlineDao {
 		Query query = entityManager.createQuery("select a from Airline a where a.name=:name", Airline.class);
 		query.setParameter("name", name);
 
-		return (Airline) query.getSingleResult();
+		try {
+			return (Airline) query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
